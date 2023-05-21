@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 
-export const RandomImagesWrap = styled('div')`
+export default styled('div')`
   min-height: 200px;
   display: flex;
   justify-content: center;

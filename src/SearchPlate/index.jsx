@@ -1,10 +1,10 @@
-import { SearchPlateWrap } from './SearchPlate.styles';
+import Styled from "./styles";
 import { useRef, useState } from 'react';
-import { ObserverService } from '../services/Observer.service';
+import { ObserverService } from '../services/Observer';
 
 
 
-export const SearchPlate = () => {
+function SearchPlate() {
   const searchInput = useRef();
   const [showValidation, setShowValidation] = useState(null);
   const onButtonClick = () => {
@@ -17,12 +17,15 @@ export const SearchPlate = () => {
   };
 
   return (
-    <SearchPlateWrap>
+    <Styled>
       <div className="input-and-button">
         <input ref={searchInput} className="search-input" placeholder="License nr."/>
         <button className="send-button" onClick={onButtonClick}>Send</button>
       </div>
       {showValidation ? <div className="validation">License number has incorrect format</div> : ''}
-    </SearchPlateWrap>
+    </Styled>
   );
-};
+}
+
+
+export default SearchPlate;

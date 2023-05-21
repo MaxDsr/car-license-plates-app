@@ -31,4 +31,4 @@ const ChevronWrap = styled('i')`
   }
 `;
 
-export const Chevron = (props) => <ChevronWrap className={(props.right ? 'right': '') + (props.left ? 'left': '')}/>;
+export default (props) => <ChevronWrap className={(props.right ? 'right': '') + (props.left ? 'left': '')}/>;

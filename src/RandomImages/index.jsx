@@ -1,18 +1,18 @@
 import { Navigation, A11y } from 'swiper';
-import { RandomImagesWrap } from './RandomImages.styles';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { v4 as uniqueKey } from 'uuid';
-import { ObserverService } from '../services/Observer.service';
-import { Chevron } from '../chevron-arrow/Chevron';
-import { Spinner } from '../spinner/Spinner';
+import { ObserverService } from '../services/Observer';
+import ChevronArrow from "../ChevronArrow";
+import Styled from "./styles";
+import Spinner from "../Spinner";
 
 let subscription;
 
-export const RandomImages = () => {
+function RandomImages() {
   const [imagesInProgress, setImagesInProgress] = useState(true);
   const [slidersData, setSlidersData] = useState(null);
   const navigationPrevRef = useRef();
@@ -28,12 +28,12 @@ export const RandomImages = () => {
   }, []);
 
   return (
-    <RandomImagesWrap>
+    <Styled>
       {(imagesInProgress && !slidersData?.length)
         ? <div className="spinner-wrap"><Spinner/></div>
         : <div className="carousel-wrap">
-          <div className="nav-button prev-slide" ref={navigationPrevRef}><Chevron left={true}/></div>
-          <div className="nav-button next-slide" ref={navigationNextRef}><Chevron right={true}/></div>
+          <div className="nav-button prev-slide" ref={navigationPrevRef}><ChevronArrow left={true}/></div>
+          <div className="nav-button next-slide" ref={navigationNextRef}><ChevronArrow right={true}/></div>
             <Swiper
               modules={[Navigation, A11y]}
               breakpoints={breakPointsConfig}
@@ -50,9 +50,11 @@ export const RandomImages = () => {
             </Swiper>
           </div>
       }
-    </RandomImagesWrap>
+    </Styled>
   );
-};
+}
+
+export default RandomImages;
 
 function getRandomImages(setImagesInProgress, setSlidersData) {
   setImagesInProgress(true);

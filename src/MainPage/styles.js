@@ -2,7 +2,7 @@ import bgImage from '../assets/golf7R.jpeg';
 import styled from '@emotion/styled';
 
 
-export const MainPageWrap = styled('div')`
+export default styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;

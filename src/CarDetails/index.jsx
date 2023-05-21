@@ -1,15 +1,14 @@
-import { CarDetailsWrap } from './CarDetails.styles';
 import { useEffect, useState } from 'react';
-import { ObserverService } from '../services/Observer.service';
+import { ObserverService } from '../services/Observer';
 import axios from 'axios';
 import { v4 as uniqueKey } from 'uuid';
-import { Spinner } from '../spinner/Spinner';
+import Styled from "./styles";
+import Spinner from "../Spinner";
 
-const apiKey = '78bcadbc0379fe0ff9ff6a0fd0e7f1c45057324057753b56e279f9d3547232a3';
+const apiKey = '4eb5431794042791adec007a12498a980838beb0aaf0994ed086a1edd44b8d5c';
 let subscription;
 
-export const CarDetails = () => {
-
+function CarDetails() {
   const [contentInProgress, setContentInProgress] = useState(false);
   const [noData, setNoData] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -37,22 +36,23 @@ export const CarDetails = () => {
 
   const getCarDataView = () => {
     return viewData.map((item) =>
-      <div className="info-item" key={uniqueKey()}>
+      <div className="info-item" key={item.id}>
         <div className="label">{item.label}</div>
         <div className="value">{item.value}</div>
       </div>)
   };
 
   return(
-    <CarDetailsWrap className={contentInProgress || errorMessage || noData ? 'flex-center' : ''}>
+    <Styled className={contentInProgress || errorMessage || noData ? 'flex-center' : ''}>
       {!contentInProgress && viewData?.length ? getCarDataView() : ''}
       {!contentInProgress && noData ? <div className="message">No data yet.</div> : '' }
       {!contentInProgress && errorMessage ? <div className="message error">{errorMessage}</div> : ''}
       {contentInProgress ? <Spinner/> : ''}
-    </CarDetailsWrap>
+    </Styled>
   );
-};
+}
 
+export default CarDetails;
 
 function getFinalData(apiData) {
   const tradeName = apiData.merk + ' ' + apiData.handelsbenaming;
@@ -61,7 +61,7 @@ function getFinalData(apiData) {
   const labels = ['Trade name', 'Date of first admission', 'Fuel description'];
   const values = [tradeName, date, fuelType];
   return labels.reduce(
-    (prev, curr, index) => ([...prev, { label: curr, value: values[index] }]),
+    (prev, curr, index) => ([...prev, { id: uniqueKey(), label: curr, value: values[index] }]),
     []);
 }
 

@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
-const SpinnerWrap = styled('div')`
+export default styled('div')`
   position: relative;
   width: 80px;
   height: 80px;
@@ -34,8 +34,3 @@ const SpinnerWrap = styled('div')`
     }
   }
 `;
-
-
-export const Spinner = () => (
-  <SpinnerWrap><div/><div/></SpinnerWrap>
-);
