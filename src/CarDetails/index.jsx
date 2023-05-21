@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import { ObserverService } from '../services/Observer';
 import axios from 'axios';
-import { v4 as uniqueKey } from 'uuid';
 import Styled from "./styles";
 import Spinner from "../Spinner";
 import {getCarDetails} from "./helpers";
 
-const apiKey = '4eb5431794042791adec007a12498a980838beb0aaf0994ed086a1edd44b8d5c';
 let subscription;
 
 function CarDetails() {
@@ -18,7 +16,7 @@ function CarDetails() {
   useEffect(() => {
     subscription = ObserverService.subscribeSearchPlate((licenseNumber) => {
       setContentInProgress(true);
-      axios.get(`https://api.overheid.io/voertuiggegevens/${licenseNumber}?ovio-api-key=${apiKey}`)
+      axios.get(`https://api.overheid.io/voertuiggegevens/${licenseNumber}?ovio-api-key=${process.env.REACT_APP_API_KEY}`)
         .then((response) => {
           setViewData(() => getCarDetails(response.data));
           setErrorMessage(false);
