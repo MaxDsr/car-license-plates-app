@@ -3,12 +3,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import React, { useEffect, useRef, useState } from 'react';
-import axios from 'axios';
-import { v4 as uniqueKey } from 'uuid';
 import { ObserverService } from '../services/Observer';
 import ChevronArrow from "../ChevronArrow";
 import Styled from "./styles";
 import Spinner from "../Spinner";
+import {BREAKPOINTS_CONFIG} from "./consts";
+import {getRandomImages} from "./helpers";
 
 let subscription;
 
@@ -36,7 +36,7 @@ function RandomImages() {
           <div className="nav-button next-slide" ref={navigationNextRef}><ChevronArrow right={true}/></div>
             <Swiper
               modules={[Navigation, A11y]}
-              breakpoints={breakPointsConfig}
+              breakpoints={BREAKPOINTS_CONFIG}
               onBeforeInit={(swiper) => {
                 swiper.params.navigation.prevEl = navigationPrevRef.current;
                 swiper.params.navigation.nextEl = navigationNextRef.current;
@@ -55,51 +55,3 @@ function RandomImages() {
 }
 
 export default RandomImages;
-
-function getRandomImages(setImagesInProgress, setSlidersData) {
-  setImagesInProgress(true);
-  const requests = [];
-  for (let i = 0; i < 6; i++) {
-    requests.push(axios.get('https://picsum.photos/300/200', { responseType: 'blob' }));
-  }
-
-  Promise.all(requests)
-    .then((responses) => {
-      const blobs = responses.map((response) => response.data);
-      return blobs.map((item) => loadFileToDataURL(item));
-    })
-    .then((blobsLoading) => Promise.all(blobsLoading))
-    .then((loadedImages) => {
-      setSlidersData(loadedImages.map((image) => ({ uniqueKey: uniqueKey(), image: image })));
-      setImagesInProgress(false);
-    });
-}
-
-function loadFileToDataURL(file) {
-  const reader = new FileReader();
-  return new Promise((resolve) => {
-    reader.onload = (event) => {
-      resolve(event.target.result);
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
-const breakPointsConfig = {
-  315: {
-    slidesPerView: 1,
-    spaceBetween: 10,
-  },
-  482: {
-    slidesPerView: 1,
-    spaceBetween: 10,
-  },
-  600: {
-    slidesPerView: 2,
-    spaceBetween: 10,
-  },
-  1200: {
-    slidesPerView: 3,
-    spaceBetween: 30
-  },
-};

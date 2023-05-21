@@ -3,17 +3,21 @@ import { useRef, useState } from 'react';
 import { ObserverService } from '../services/Observer';
 
 
-
 function SearchPlate() {
   const searchInput = useRef();
   const [showValidation, setShowValidation] = useState(null);
   const onButtonClick = () => {
-    if(searchInput?.current?.value?.length > 11) {
+    const inputValue = searchInput?.current?.value?.trim();
+    if (!inputValue) {
+      setShowValidation(true);
+      return;
+    }
+    if(inputValue > 11) {
       setShowValidation(true);
       return;
     }
     setShowValidation(false);
-    ObserverService.emitSearchPlate(searchInput?.current?.value);
+    ObserverService.emitSearchPlate(inputValue);
   };
 
   return (
