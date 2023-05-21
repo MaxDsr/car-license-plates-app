@@ -44,4 +44,10 @@ export default styled('div')`
       font-size: 2.5rem;
     }
   }
+
+  @media screen and (min-width: 1600px) {
+    .header {
+      margin-top: 10rem;
+    }
+  }
 `;
