@@ -6,7 +6,6 @@ export function getCarDetails(apiData) {
   const fuelType = apiData.brandstof?.[0]?.brandstof_omschrijving;
   const labels = ['Trade name', 'Date of first admission', 'Fuel description'];
   const values = [tradeName, date, fuelType];
-  console.log(values);
   return labels.reduce(
     (prev, curr, index) => ([...prev, { id: uniqueKey(), label: curr, value: values[index] }]),
     []);
