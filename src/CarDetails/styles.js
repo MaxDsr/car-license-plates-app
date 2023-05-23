@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const CarDetailsWrap = styled('div')`
+export default styled('div')`
   border-radius: 10px;
   background-color: #fff;
   position: relative;

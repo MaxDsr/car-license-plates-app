@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const SearchPlateWrap = styled('div')`
+export default styled('div')`
   display: flex;
   margin: 0 auto;
   flex-direction: column;

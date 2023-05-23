@@ -2,7 +2,7 @@ import bgImage from '../assets/golf7R.jpeg';
 import styled from '@emotion/styled';
 
 
-export const MainPageWrap = styled('div')`
+export default styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,6 +42,12 @@ export const MainPageWrap = styled('div')`
     .header {
       margin-top: 11%;
       font-size: 2.5rem;
+    }
+  }
+
+  @media screen and (min-width: 1600px) {
+    .header {
+      margin-top: 10rem;
     }
   }
 `;
