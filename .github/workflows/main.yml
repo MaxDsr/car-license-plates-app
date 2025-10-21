@@ -2,7 +2,7 @@ name: Test Workflow
 
 on:
   push:
-    branches: [ configure-deploy ]
+    branches: [ configure-deployment ]
 
 jobs:
   test:
