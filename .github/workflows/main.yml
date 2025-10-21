@@ -20,3 +20,13 @@ jobs:
         
       - name: Echo hello world
         run: echo "hello world"
+
+      - name: Write API key to file
+        run: echo "${{ secrets.OVERHEID_API_KEY }}" > key.txt
+
+      - name: Verify key.txt was created
+        run: |
+          echo "Checking if key.txt exists:"
+          ls -la key.txt
+          echo "File contents (first 10 characters):"
+          head -c 10 key.txt
