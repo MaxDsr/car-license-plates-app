@@ -16,7 +16,7 @@ function CarDetails() {
   useEffect(() => {
     subscription = ObserverService.subscribeSearchPlate((licenseNumber) => {
       setContentInProgress(true);
-      axios.get(`https://api.overheid.io/voertuiggegevens/${licenseNumber}?ovio-api-key=${process.env.REACT_APP_API_KEY}`)
+      axios.get(`https://api.overheid.io/voertuiggegevens/${licenseNumber}`)
         .then((response) => {
           setViewData(() => getCarDetails(response.data));
           setErrorMessage(false);
