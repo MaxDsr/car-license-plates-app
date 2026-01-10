@@ -16,14 +16,14 @@ function CarDetails() {
   useEffect(() => {
     subscription = ObserverService.subscribeSearchPlate((licenseNumber) => {
       setContentInProgress(true);
-      axios.get(`https://api.overheid.io/voertuiggegevens/${licenseNumber}`)
+      axios.get(`/api/get-plates-info/${licenseNumber}`)
         .then((response) => {
           setViewData(() => getCarDetails(response.data));
           setErrorMessage(false);
           ObserverService.emitImagesUpdate();
         })
         .catch((error) => {
-          setErrorMessage(error.response?.data?.error);
+          setErrorMessage(error.response?.data?.error || 'Failed to fetch car details');
           setViewData(false);
         })
         .finally(() => {
