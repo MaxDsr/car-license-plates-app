@@ -19,3 +19,5 @@ RUN npm run build
 # The container will exit after build completes
 CMD ["echo", "Build completed successfully!"]
 
+
+
